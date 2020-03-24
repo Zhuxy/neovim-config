@@ -30,6 +30,10 @@ Plug 'bling/vim-airline'
 "nerdtree 文件树
 Plug 'scrooloose/nerdtree'
 
+Plug 'rust-lang/rust.vim'
+
+Plug 'tpope/vim-fugitive'
+
 call plug#end()
 if exists('s:install_plug')
   augroup PlugInstall

@@ -34,6 +34,8 @@ Plug 'rust-lang/rust.vim'
 
 Plug 'tpope/vim-fugitive'
 
+Plug 'easymotion/vim-easymotion'
+
 call plug#end()
 if exists('s:install_plug')
   augroup PlugInstall

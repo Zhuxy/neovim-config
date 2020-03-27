@@ -70,7 +70,7 @@ let NERDTreeChDirMode=2                                         " 设置当前�
 let NERDChristmasTree=1                                         " 使得窗口有更好看的效果
 let NERDTreeMouseMode=1                                         " 双击鼠标左键打开文件
 let NERDTreeWinSize=25                                          " 设置窗口宽度为25
-let NERDTreeQuitOnOpen=1                                        " 打开一个文件时nerdtree分栏自动关闭
+" let NERDTreeQuitOnOpen=1                                        " 打开一个文件时nerdtree分栏自动关闭
 " 打开文件默认开启文件树
 " autocmd VimEnter * NERDTree
 

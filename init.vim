@@ -32,9 +32,17 @@ Plug 'scrooloose/nerdtree'
 
 Plug 'rust-lang/rust.vim'
 
-Plug 'tpope/vim-fugitive'
+"git插件
+"Plug 'tpope/vim-fugitive'
 
+"快速检索移动光标插件
 Plug 'easymotion/vim-easymotion'
+
+"工作空间插件
+" Plug 'thaerkh/vim-workspace'
+
+"模糊查找插件
+Plug 'cloudhead/neovim-fuzzy'
 
 call plug#end()
 if exists('s:install_plug')
@@ -118,3 +126,9 @@ set backspace=indent,eol,start
 "自动保存
 " let g:auto_save = 1
 " let g:auto_save_events = ["InsertLeave", "TextChanged", "TextChangedI", "CursorHoldI", "CompleteDone"]
+
+let g:workspace_autosave_always = 1
+let g:workspace_autosave = 0
+
+" 打开文件查找框
+nnoremap <C-p> :FuzzyOpen<CR>

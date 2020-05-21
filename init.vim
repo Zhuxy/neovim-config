@@ -135,11 +135,11 @@ nnoremap <C-p> :FuzzyOpen<CR>
 
 "************coc插件配置*************
 "使用<tab>补全
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+"inoremap <silent><expr> <TAB>
+"      \ pumvisible() ? "\<C-n>" :
+"      \ <SID>check_back_space() ? "\<TAB>" :
+"      \ coc#refresh()
+"inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
 " GoTo code navigation.
 nmap <silent> gd <Plug>(coc-definition)
@@ -158,3 +158,5 @@ function! s:show_documentation()
   endif
 endfunction
 
+let mapleader=","
+let g:EasyMotion_keys = "abcdefghijklmnopqrstuvwxyz"

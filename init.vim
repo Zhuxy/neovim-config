@@ -150,6 +150,10 @@ nmap <silent> gr <Plug>(coc-references)
 " Use K to show documentation in preview window.
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 
+" 打开当前文档的outline和symbols
+nnoremap <C-o> :CocList outline<CR>
+nnoremap <C-i> :CocList symbols<CR>
+
 function! s:show_documentation()
   if &filetype == 'vim'
     execute 'h '.expand('<cword>')

@@ -151,7 +151,7 @@ nmap <silent> gr <Plug>(coc-references)
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 
 " 打开当前文档的outline和symbols
-nnoremap <C-o> :CocList outline<CR>
+nnoremap <C-l> :CocList outline<CR>
 nnoremap <C-i> :CocList symbols<CR>
 
 function! s:show_documentation()

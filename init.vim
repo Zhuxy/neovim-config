@@ -44,6 +44,13 @@ Plug 'easymotion/vim-easymotion'
 "模糊查找插件
 Plug 'cloudhead/neovim-fuzzy'
 
+"Plug 'tpope/vim-surround'
+
+Plug 'andymass/vim-matchup'
+
+" add this line to your .vimrc file
+Plug 'mattn/emmet-vim'
+
 call plug#end()
 if exists('s:install_plug')
   augroup PlugInstall
@@ -151,8 +158,8 @@ nmap <silent> gr <Plug>(coc-references)
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 
 " 打开当前文档的outline和symbols
-nnoremap <C-l> :CocList outline<CR>
-nnoremap <C-i> :CocList symbols<CR>
+nnoremap <C-i> :CocList outline<CR>
+" nnoremap <C-i> :CocList symbols<CR>
 
 function! s:show_documentation()
   if &filetype == 'vim'
@@ -164,3 +171,5 @@ endfunction
 
 let mapleader=","
 let g:EasyMotion_keys = "abcdefghijklmnopqrstuvwxyz"
+
+nmap <leader>p :reg<CR>

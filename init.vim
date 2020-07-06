@@ -30,7 +30,9 @@ Plug 'bling/vim-airline'
 "nerdtree 文件树
 Plug 'scrooloose/nerdtree'
 
+Plug 'cespare/vim-toml'
 Plug 'rust-lang/rust.vim'
+Plug 'plasticboy/vim-markdown'
 
 "git插件
 "Plug 'tpope/vim-fugitive'

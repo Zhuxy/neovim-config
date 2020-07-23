@@ -121,6 +121,9 @@ set cursorline
 set nu
 
 "************缩进设置***************
+"
+set ts=4
+set expandtab
 " 自动套用上一行的缩进方式
 set autoindent
 " 开智能缩进

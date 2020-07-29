@@ -30,7 +30,9 @@ Plug 'bling/vim-airline'
 "nerdtree 文件树
 Plug 'scrooloose/nerdtree'
 
+Plug 'cespare/vim-toml'
 Plug 'rust-lang/rust.vim'
+Plug 'plasticboy/vim-markdown'
 
 "git插件
 "Plug 'tpope/vim-fugitive'
@@ -43,6 +45,13 @@ Plug 'easymotion/vim-easymotion'
 
 "模糊查找插件
 Plug 'cloudhead/neovim-fuzzy'
+
+"Plug 'tpope/vim-surround'
+
+Plug 'andymass/vim-matchup'
+
+" add this line to your .vimrc file
+Plug 'mattn/emmet-vim'
 
 call plug#end()
 if exists('s:install_plug')
@@ -138,11 +147,11 @@ nnoremap <C-p> :FuzzyOpen<CR>
 
 "************coc插件配置*************
 "使用<tab>补全
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+"inoremap <silent><expr> <TAB>
+"      \ pumvisible() ? "\<C-n>" :
+"      \ <SID>check_back_space() ? "\<TAB>" :
+"      \ coc#refresh()
+"inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
 " GoTo code navigation.
 nmap <silent> gd <Plug>(coc-definition)
@@ -153,6 +162,10 @@ nmap <silent> gr <Plug>(coc-references)
 " Use K to show documentation in preview window.
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 
+" 打开当前文档的outline和symbols
+nnoremap <C-i> :CocList outline<CR>
+" nnoremap <C-i> :CocList symbols<CR>
+
 function! s:show_documentation()
   if &filetype == 'vim'
     execute 'h '.expand('<cword>')
@@ -161,4 +174,10 @@ function! s:show_documentation()
   endif
 endfunction
 
-let mapleader = ","
+let mapleader=","
+let g:EasyMotion_keys = "abcdefghijklmnopqrstuvwxyz"
+
+nmap <leader>p :reg<CR>
+
+" use mouse in all mode
+set mouse=nvi

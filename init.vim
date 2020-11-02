@@ -1,4 +1,4 @@
-"################################## 插件管理 ##################################
+
 " 关闭文件类型自动检测功能,这个功能被filetype plugin indent on代替          
 filetype off
 
@@ -52,6 +52,18 @@ Plug 'andymass/vim-matchup'
 
 " add this line to your .vimrc file
 Plug 'mattn/emmet-vim'
+
+" JavaScript support
+Plug 'pangloss/vim-javascript'    
+
+" TypeScript syntax
+Plug 'leafgarland/typescript-vim' 
+
+" JS and JSX syntax
+Plug 'maxmellon/vim-jsx-pretty'   
+
+" TSX support
+Plug 'peitalin/vim-jsx-typescript'
 
 call plug#end()
 if exists('s:install_plug')

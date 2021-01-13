@@ -17,6 +17,7 @@ Plug 'mhinz/vim-startify'
 
 " 样式
 Plug 'gertjanreynaert/cobalt2-vim-theme'
+" Plug 'herrbischoff/cobalt2.vim'
 
 " 自动补全插件
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -79,6 +80,8 @@ set background=dark
 colorscheme cobalt2
 hi CursorLineNr term=bold ctermfg=11 gui=bold guifg=Yellow
 hi LineNr term=bold ctermfg=Gray gui=bold guifg=Yellow
+
+hi CursorLine gui=underline cterm=underline
 " 界面样式配置结束
 
 "##################################按键设置##################################

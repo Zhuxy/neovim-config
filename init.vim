@@ -47,7 +47,7 @@ Plug 'easymotion/vim-easymotion'
 "模糊查找插件
 Plug 'cloudhead/neovim-fuzzy'
 
-"Plug 'tpope/vim-surround'
+" Plug 'tpope/vim-surround'
 
 Plug 'andymass/vim-matchup'
 
@@ -81,7 +81,7 @@ colorscheme cobalt2
 hi CursorLineNr term=bold ctermfg=11 gui=bold guifg=Yellow
 hi LineNr term=bold ctermfg=Gray gui=bold guifg=Yellow
 
-hi CursorLine gui=underline cterm=underline
+" hi CursorLine gui=underline cterm=underline
 " 界面样式配置结束
 
 "##################################按键设置##################################
@@ -91,10 +91,10 @@ nnoremap <F3> :NERDTreeToggle<CR>
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 " ctrl-j/k/l/h  分屏窗口移动 Normal mode
-nnoremap <C-j> <C-W>j
-nnoremap <C-k> <C-W>k
-nnoremap <C-l> <C-W>l
-nnoremap <C-h> <C-W>h
+" nnoremap <C-j> <C-W>j
+" nnoremap <C-k> <C-W>k
+" nnoremap <C-l> <C-W>l
+" nnoremap <C-h> <C-W>h
 
 "##################################插件设置##################################
 
@@ -196,3 +196,7 @@ nmap <leader>p :reg<CR>
 
 " use mouse in all mode
 set mouse=nvi
+
+" move to line end/start
+nmap <silent> ge $
+nmap <silent> gb ^

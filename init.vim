@@ -17,7 +17,6 @@ Plug 'mhinz/vim-startify'
 
 " 样式
 Plug 'gertjanreynaert/cobalt2-vim-theme'
-" Plug 'herrbischoff/cobalt2.vim'
 
 " 自动补全插件
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -37,6 +36,10 @@ Plug 'plasticboy/vim-markdown'
 
 "git插件
 "Plug 'tpope/vim-fugitive'
+
+" 高亮yank的内容, 并持续10s
+Plug 'machakann/vim-highlightedyank'
+let g:highlightedyank_highlight_duration = 10000
 
 "快速检索移动光标插件
 Plug 'easymotion/vim-easymotion'
@@ -65,6 +68,9 @@ Plug 'maxmellon/vim-jsx-pretty'
 
 " TSX support
 Plug 'peitalin/vim-jsx-typescript'
+
+" debugger plugin
+" Plug 'puremourning/vimspector'
 
 call plug#end()
 if exists('s:install_plug')
@@ -200,3 +206,11 @@ set mouse=nvi
 " move to line end/start
 nmap <silent> ge $
 nmap <silent> gb ^
+
+" let g:vimspector_enable_mappings = 'HUMAN'
+" nmap <leader>dd :call vimspector#Launch()<CR>
+" nmap <leader>dx :VimspectorReset<CR>
+" nmap <leader>de :VimspectorEval
+" nmap <leader>dw :VimspectorWatch
+" nmap <leader>do :VimspectorShowOutput
+" let g:vimspector_install_gadgets = [ 'CodeLLDB' ]

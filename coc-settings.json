@@ -1,3 +1,4 @@
 {
-        "java.configuration.maven.userSettings": "/Users/zhuxy/Dev/java/apache-maven-3.5.2/conf/settings.xml"
+        "java.configuration.maven.userSettings": "/Users/zhuxy/Dev/java/apache-maven-3.5.2/conf/settings.xml",
+        "rust-analyzer.serverPath": "/Users/zhuxy/.cargo/bin/rust-analyzer"
 }

@@ -1,12 +1,12 @@
 
-" 关闭文件类型自动检测功能,这个功能被filetype plugin indent on代替          
+" 关闭文件类型自动检测功能,这个功能被filetype plugin indent on代替
 filetype off
 
 " 自动安装插件管理器(待验证是否可行)
 let s:vim_plug_dir=expand('~/.config/nvim/autoload')
 if !filereadable(s:vim_plug_dir.'/plug.vim')
-  execute '!wget https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim -P '.s:vim_plug_dir
-  let s:install_plug=1
+        execute '!wget https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim -P '.s:vim_plug_dir
+        let s:install_plug=1
 endif
 
 " 设置插件的安装位置
@@ -57,13 +57,13 @@ Plug 'andymass/vim-matchup'
 Plug 'mattn/emmet-vim'
 
 " JavaScript support
-Plug 'pangloss/vim-javascript'    
+Plug 'pangloss/vim-javascript'
 
 " TypeScript syntax
-Plug 'leafgarland/typescript-vim' 
+Plug 'leafgarland/typescript-vim'
 
 " JS and JSX syntax
-Plug 'maxmellon/vim-jsx-pretty'   
+Plug 'maxmellon/vim-jsx-pretty'
 
 " TSX support
 Plug 'peitalin/vim-jsx-typescript'
@@ -76,6 +76,7 @@ Plug 'peitalin/vim-jsx-typescript'
 
 " nvim-lsp 插件
 Plug 'neovim/nvim-lsp'
+Plug 'neovim/nvim-lspconfig'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'Shougo/deoplete-lsp'
 Plug 'ervandew/supertab'
@@ -83,13 +84,13 @@ Plug 'Chiel92/vim-autoformat'
 
 call plug#end()
 if exists('s:install_plug')
-  augroup PlugInstall
-    au!
-    au VimEnter * PlugInstall
-  augroup END
+        augroup PlugInstall
+                au!
+                au VimEnter * PlugInstall
+        augroup END
 endif
 
-" 界面样式配置开始 
+" 界面样式配置开始
 syntax enable
 set background=dark
 colorscheme cobalt2
@@ -109,6 +110,12 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 nmap <silent> ge $
 nmap <silent> gb ^
 
+let mapleader=","
+let g:EasyMotion_keys = "abcdefghijklmnopqrstuvwxyz"
+
+" 打开注册表(粘贴板)
+nmap <leader>p :reg<CR>
+
 "##################################插件设置##################################
 
 " *********** NERDTree插件配置 ***********
@@ -124,10 +131,10 @@ let NERDTreeWinSize=25                                          " 设置窗口�
 "#################################vim设置##################################
 "************常规设置****************
 "设置历史操作记录为1000条
-set history=1000  
+set history=1000
 " 不启用vi的键盘模式,而是vim自己的
 set nocompatible
-" 载入文件类型插件,代替filetype off 
+" 载入文件类型插件,代替filetype off
 filetype plugin indent on
 
 " use mouse in all mode
@@ -165,7 +172,7 @@ set scrolloff=4
 set showmatch
 
 " 对退格键提供更好帮助
-set backspace=indent,eol,start   
+set backspace=indent,eol,start
 "自动保存
 " let g:auto_save = 1
 " let g:auto_save_events = ["InsertLeave", "TextChanged", "TextChangedI", "CursorHoldI", "CompleteDone"]
@@ -177,40 +184,73 @@ let g:workspace_autosave = 0
 nnoremap <C-p> :FuzzyOpen<CR>
 
 "************coc插件配置*************
-"使用<tab>补全
-"inoremap <silent><expr> <TAB>
-"      \ pumvisible() ? "\<C-n>" :
-"      \ <SID>check_back_space() ? "\<TAB>" :
-"      \ coc#refresh()
-"inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+" "使用<tab>补全
+" "inoremap <silent><expr> <TAB>
+" "      \ pumvisible() ? "\<C-n>" :
+" "      \ <SID>check_back_space() ? "\<TAB>" :
+" "      \ coc#refresh()
+" "inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+"
+" " GoTo code navigation.
+" nmap <silent> gd <Plug>(coc-definition)
+" nmap <silent> gy <Plug>(coc-type-definition)
+" nmap <silent> gi <Plug>(coc-implementation)
+" nmap <silent> gr <Plug>(coc-references)
+"
+" " Use K to show documentation in preview window.
+" nnoremap <silent> K :call <SID>show_documentation()<CR>
+"
+" " 打开当前文档的outline和symbols
+" nnoremap <C-i> :CocList outline<CR>
+" " nnoremap <C-i> :CocList symbols<CR>
+"
+" function! s:show_documentation()
+"   if &filetype == 'vim'
+"     execute 'h '.expand('<cword>')
+"   else
+"     call CocAction('doHover')
+"   endif
+" endfunction
 
-" GoTo code navigation.
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
+"************coc插件配置 end *************
 
-" Use K to show documentation in preview window.
-nnoremap <silent> K :call <SID>show_documentation()<CR>
+"************nvim-lsp 插件配置 start *************
+" setup rust_analyzer LSP (IDE features)
 
-" 打开当前文档的outline和symbols
-nnoremap <C-i> :CocList outline<CR>
-" nnoremap <C-i> :CocList symbols<CR>
+lua require'lspconfig'.rust_analyzer.setup{}
 
-function! s:show_documentation()
-  if &filetype == 'vim'
-    execute 'h '.expand('<cword>')
-  else
-    call CocAction('doHover')
-  endif
-endfunction
+" Use LSP omni-completion in Rust files
+autocmd Filetype rust setlocal omnifunc=v:lua.vim.lsp.omnifunc
 
-let mapleader=","
-let g:EasyMotion_keys = "abcdefghijklmnopqrstuvwxyz"
+" Enable deoplete autocompletion in Rust files
+let g:deoplete#enable_at_startup = 1
 
-nmap <leader>p :reg<CR>
+" customise deoplete                                                                                                                                                     " maximum candidate window length
+call deoplete#custom#source('_', 'max_menu_width', 80)
 
+" Press Tab to scroll _down_ a list of auto-completions
+let g:SuperTabDefaultCompletionType = "<c-n>"
 
+" rustfmt on write using autoformat
+autocmd BufWrite * :Autoformat
+
+"TODO: clippy on write
+autocmd BufWrite * :Autoformat
+
+nnoremap <leader>c :!cargo clippy
+
+nnoremap <silent> gd    <cmd>lua vim.lsp.buf.definition()<CR>
+nnoremap <silent> K     <cmd>lua vim.lsp.buf.hover()<CR>
+nnoremap <silent> gi    <cmd>lua vim.lsp.buf.implementation()<CR>
+" nnoremap <silent> <c-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
+nnoremap <silent> gy   <cmd>lua vim.lsp.buf.type_definition()<CR>
+nnoremap <silent> gr    <cmd>lua vim.lsp.buf.references()<CR>
+nnoremap <silent> g0    <cmd>lua vim.lsp.buf.document_symbol()<CR>
+nnoremap <silent> gW    <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
+
+"************nvim-lsp 插件配置 end *************
+
+"************vimspector插件配置 start *************
 " let g:vimspector_enable_mappings = 'HUMAN'
 " nmap <leader>dd :call vimspector#Launch()<CR>
 " nmap <leader>dx :VimspectorReset<CR>
@@ -218,3 +258,4 @@ nmap <leader>p :reg<CR>
 " nmap <leader>dw :VimspectorWatch
 " nmap <leader>do :VimspectorShowOutput
 " let g:vimspector_install_gadgets = [ 'CodeLLDB' ]
+"************vimspector插件配置 end *************

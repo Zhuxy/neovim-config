@@ -1,4 +1,3 @@
-
 " 关闭文件类型自动检测功能,这个功能被filetype plugin indent on代替
 filetype off
 
@@ -75,8 +74,8 @@ Plug 'peitalin/vim-jsx-typescript'
 " Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " nvim-lsp 插件
-Plug 'neovim/nvim-lsp'
 Plug 'neovim/nvim-lspconfig'
+Plug 'nvim-lua/lsp_extensions.nvim'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'Shougo/deoplete-lsp'
 Plug 'ervandew/supertab'
@@ -215,9 +214,25 @@ nnoremap <C-p> :FuzzyOpen<CR>
 "************coc插件配置 end *************
 
 "************nvim-lsp 插件配置 start *************
-" setup rust_analyzer LSP (IDE features)
+" Configure LSP
+" https://github.com/neovim/nvim-lspconfig#rust_analyzer
+lua <<EOF
 
-lua require'lspconfig'.rust_analyzer.setup{}
+-- nvim_lsp object
+local nvim_lsp = require'lspconfig'
+
+-- Enable rust_analyzer
+nvim_lsp.rust_analyzer.setup({ on_attach=on_attach })
+
+-- Enable diagnostics
+vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+vim.lsp.diagnostic.on_publish_diagnostics, {
+virtual_text = true,
+signs = true,
+update_in_insert = true,
+}
+)
+EOF
 
 " Use LSP omni-completion in Rust files
 autocmd Filetype rust setlocal omnifunc=v:lua.vim.lsp.omnifunc
@@ -232,10 +247,10 @@ call deoplete#custom#source('_', 'max_menu_width', 80)
 let g:SuperTabDefaultCompletionType = "<c-n>"
 
 " rustfmt on write using autoformat
-autocmd BufWrite * :Autoformat
+" autocmd BufWrite * :Autoformat
 
 "TODO: clippy on write
-autocmd BufWrite * :Autoformat
+" autocmd BufWrite * :Autoformat
 
 nnoremap <leader>c :!cargo clippy
 
@@ -247,6 +262,45 @@ nnoremap <silent> gy   <cmd>lua vim.lsp.buf.type_definition()<CR>
 nnoremap <silent> gr    <cmd>lua vim.lsp.buf.references()<CR>
 nnoremap <silent> g0    <cmd>lua vim.lsp.buf.document_symbol()<CR>
 nnoremap <silent> gW    <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
+nnoremap <silent> gD    <cmd>lua vim.lsp.buf.declaration()<CR>
+
+nnoremap <silent> ga    <cmd>lua vim.lsp.buf.code_action()<CR>
+
+" Set completeopt to have a better completion experience
+" :help completeopt
+" menuone: popup even when there's only one match
+" noinsert: Do not insert text until a selection is made
+" noselect: Do not select, force user to select one from the menu
+set completeopt=menuone,noinsert,noselect
+
+" Avoid showing extra messages when using completion
+set shortmess+=c
+
+" Use <Tab> and <S-Tab> to navigate through popup menu
+inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+
+" use <Tab> as trigger keys
+imap <Tab> <Plug>(completion_smart_tab)
+imap <S-Tab> <Plug>(completion_smart_s_tab)
+
+" Set updatetime for CursorHold
+" 300ms of no cursor movement to trigger CursorHold
+set updatetime=300
+" Show diagnostic popup on cursor hold
+autocmd CursorHold * lua vim.lsp.diagnostic.show_line_diagnostics()
+
+" Goto previous/next diagnostic warning/error
+nnoremap <silent> g[ <cmd>lua vim.lsp.diagnostic.goto_prev()<CR>
+nnoremap <silent> g] <cmd>lua vim.lsp.diagnostic.goto_next()<CR>
+
+" have a fixed column for the diagnostics to appear in
+" this removes the jitter when warnings/errors flow in
+set signcolumn=yes
+
+" Enable type inlay hints
+autocmd CursorMoved,InsertLeave,BufEnter,BufWinEnter,TabEnter,BufWritePost *
+                        \ lua require'lsp_extensions'.inlay_hints{ prefix = '', highlight = "Comment", enabled = {"TypeHint", "ChainingHint", "ParameterHint"} }
 
 "************nvim-lsp 插件配置 end *************
 

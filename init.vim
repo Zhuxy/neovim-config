@@ -18,9 +18,6 @@ Plug 'mhinz/vim-startify'
 " 样式
 Plug 'gertjanreynaert/cobalt2-vim-theme'
 
-" 自动补全插件
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-
 "自动引号/括号
 Plug 'jiangmiao/auto-pairs'
 
@@ -30,8 +27,11 @@ Plug 'bling/vim-airline'
 "nerdtree 文件树
 Plug 'scrooloose/nerdtree'
 
+" plugin for rust
 Plug 'cespare/vim-toml'
 Plug 'rust-lang/rust.vim'
+
+" plugin for markdown
 Plug 'plasticboy/vim-markdown'
 
 "git插件
@@ -50,11 +50,10 @@ Plug 'easymotion/vim-easymotion'
 "模糊查找插件
 Plug 'cloudhead/neovim-fuzzy'
 
-" Plug 'tpope/vim-surround'
-
+" 括号引号配对
 Plug 'andymass/vim-matchup'
 
-" add this line to your .vimrc file
+" html/xml速写
 Plug 'mattn/emmet-vim'
 
 " JavaScript support
@@ -71,6 +70,16 @@ Plug 'peitalin/vim-jsx-typescript'
 
 " debugger plugin
 " Plug 'puremourning/vimspector'
+
+" language client 插件
+" Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
+" nvim-lsp 插件
+Plug 'neovim/nvim-lsp'
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'Shougo/deoplete-lsp'
+Plug 'ervandew/supertab'
+Plug 'Chiel92/vim-autoformat'
 
 call plug#end()
 if exists('s:install_plug')
@@ -96,11 +105,9 @@ hi LineNr term=bold ctermfg=Gray gui=bold guifg=Yellow
 nnoremap <F3> :NERDTreeToggle<CR>
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
-" ctrl-j/k/l/h  分屏窗口移动 Normal mode
-" nnoremap <C-j> <C-W>j
-" nnoremap <C-k> <C-W>k
-" nnoremap <C-l> <C-W>l
-" nnoremap <C-h> <C-W>h
+" move to line end/start
+nmap <silent> ge $
+nmap <silent> gb ^
 
 "##################################插件设置##################################
 
@@ -122,6 +129,9 @@ set history=1000
 set nocompatible
 " 载入文件类型插件,代替filetype off 
 filetype plugin indent on
+
+" use mouse in all mode
+set mouse=nvi
 
 "************搜索设置***************
 " 搜索的时候不区分大小写,是set ignorecase缩写.如果你想启用,输入:set noic(noignorecase缩写)
@@ -200,12 +210,6 @@ let g:EasyMotion_keys = "abcdefghijklmnopqrstuvwxyz"
 
 nmap <leader>p :reg<CR>
 
-" use mouse in all mode
-set mouse=nvi
-
-" move to line end/start
-nmap <silent> ge $
-nmap <silent> gb ^
 
 " let g:vimspector_enable_mappings = 'HUMAN'
 " nmap <leader>dd :call vimspector#Launch()<CR>
